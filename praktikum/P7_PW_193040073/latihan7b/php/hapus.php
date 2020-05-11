@@ -1,0 +1,14 @@
+<?php
+require 'functions.php';
+$id = $_GET['Id'];
+if (hapus($id) > 0) {
+  echo "<script>
+    alert('Data berhasil dihapus');
+    document.location.href = 'admin.php';
+    </script>";
+} else {
+  "<script>
+    alert('Data gagal dihapus');
+    document.location.href = 'admin.php';
+    </script>";
+}

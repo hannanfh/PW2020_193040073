@@ -1,0 +1,95 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['login'])) {
+  header("Location: login.php");
+  exit;
+}
+require 'functions.php';
+
+$mahasiswa = query("SELECT * FROM mahasiswa");
+if (isset($_POST['cari'])) {
+  $mahasiswa = cari($_POST['keyword']);
+}
+
+?>
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+  <title>Index</title>
+  <style>
+  </style>
+</head>
+
+<body>
+  <!-- navbar -->
+  <nav class="navbar navbar-light bg-info">
+    <img class="img" src="img/if.png" width="120px">
+  </nav>
+  <!-- akhir navbar -->
+
+  <button>
+    <a href="tambah.php">Tambah Data Mahasiswa</a>
+  </button>
+  <button>
+    <a href="logout.php">Logout!</a>
+  </button>
+  <br>
+  <form action="" method="POST">
+    <input type="text" name="keyword" size="40" placeholder="Cari mahasiswa" autocomplete="off" autofocus class="
+    keyword">
+    <button type="submit" name="cari" class="tombol-cari">Cari</button>
+
+  </form>
+  <!-- table -->
+  <div class="container">
+    <table class="table table-striped">
+      <thead class="table-info">
+        <tr style="text-align: center">
+          <th scope="col">Id</th>
+          <th scope="col">GAMBAR</th>
+          <th scope="col">NAMA</th>
+          <th scope="col">AKSI</th>
+        </tr>
+        <?php if (empty($mahasiswa)) : ?>
+          <tr>
+            <td colspan="4">
+              <p>DATA NOT FOUND!!</p>
+            </td>
+          </tr>
+
+        <?php endif; ?>
+        <?php $i = 1; ?>
+        <?php foreach ($mahasiswa as $m) : ?>
+      </thead>
+      <tbody style="text-align: center">
+        <tr>
+          <td><?= $i++; ?></td>
+          <td><img src="img/<?= $m['Gambar']; ?>" width="200"></td>
+          <td><?= $m['Nama']; ?></td>
+          <td>
+            <a href="detail.php?Id=<?= $m['Id']; ?>">Lihat Detail</a>
+          </td>
+        </tr>
+      <?php endforeach; ?>
+      </tbody>
+    </table>
+  </div>
+  <!-- akhir table -->
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  <script src="js/script.js"></script>
+</body>
+
+</html>

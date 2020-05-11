@@ -1,0 +1,23 @@
+.img {
+  height: 40px;
+}
+.p1 {
+font-size:medium;
+color: snow;
+font-style: italic;
+}
+.jumbotron {
+  background-image:url(../img/buku.jpg);
+  background-size: cover;
+  height: 450px;
+}
+.jumfont {
+  font-size: xx-large;
+  color: azure;
+  font-style: italic;
+  float: right;
+}
+
+body {
+  background-color: skyblue;
+}
