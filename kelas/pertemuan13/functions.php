@@ -33,7 +33,7 @@ function upload()
     //   echo "<script>
     //    alert('Pilih gambar terlebih dahulu')
     //   </script>";
-    return 'nophoto.jpg';
+    return 'no.png';
   }
 
   //Cek ekstensi file
